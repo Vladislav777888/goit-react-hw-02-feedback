@@ -6,14 +6,10 @@ import { Statistics } from './Statistics';
 import { Notification } from './Notification';
 
 export class App extends Component {
-  static defaultProps = {
-    initialValue: 0,
-  };
-
   state = {
-    good: this.props.initialValue,
-    neutral: this.props.initialValue,
-    bad: this.props.initialValue,
+    good: 0,
+    neutral: 0,
+    bad: 0,
   };
 
   handleClick = e => {
@@ -24,17 +20,17 @@ export class App extends Component {
     }));
   };
 
-  countTotalFeedback() {
+  countTotalFeedback = () => {
     return Object.values(this.state).reduce((acc, el) => (acc += el), 0);
-  }
+  };
 
-  countPositiveFeedbackPercentage() {
+  countPositiveFeedbackPercentage = () => {
     const { good } = this.state;
     const totalValue = this.countTotalFeedback();
     const positivValue = (good * 100) / totalValue;
 
     return Math.round(positivValue);
-  }
+  };
 
   render() {
     const { good, neutral, bad } = this.state;
